@@ -13,15 +13,15 @@
 
 
  def hashage
-  @result = @crypto.zip(@value).to_h
+  @result = @crypto.zip(@value).to_h#le zip  fusionne deux tableau pour en creer un hashing
 
   return @result
  end
 
 def valuemax
-a= hashage.values
+a= hashage.values#values permet a la variable a de contenir uniquement les values du hashage
 
-g=a.sort_by{|s| s.scan(/\d+/).first.to_i}
+g=a.sort_by{|s| s.scan(/\d+/).first.to_i} #sort_by va trier en fonction des parametres ajoute a la suites, ici il s'agit d'un triage en fonction des values qui sont des int.
 c=g[-1]
 
 puts hashage.key(c)
@@ -31,7 +31,7 @@ end
 def valuemin
 a= hashage.values
 
-g=a.sort.reverse{|s| s.scan(/\d+/).first.to_i}
+g=a.sort.reverse{|s| s.scan(/\d+/).first.to_i}#fonction de triage mais en inversant, on fait du plus grand au plus petit
 c=g[-1]
 
 
@@ -42,45 +42,45 @@ end
 
 
 def foundname
-cle=hashage.keys
+cle=hashage.keys# cle contient toutes les keys du hashage. cette cle est un tableau, par consequent pour me deplacer dedans j'utilise les [] pour que cle  renvoi une variables exemple cle[0]= Bitcoin.
 i=0
 nombrecoin=0
-  while(cle[i]!=nil)
-      if (cle[i].include?"coin")
-      nombrecoin=nombrecoin+1
+  while(cle[i]!=nil)#oblige de faire une boucle... boucle qui permet de se deplacer dans les differentes key
+      if (cle[i].include?"coin")#si  la key[i] est egal a coin alors
+      nombrecoin=nombrecoin+1#nombre coin augmente de un en un, il s'agit d'une incrementation
       end
-    i+=1
-  end
+    i+=1#je suis juste avant la fin de ma boucle while, j'incremente mon i pour que cle[i] puisse etre une nouvelle key
+  end# je n'arrive au end que si cle[i] arrive a la fin du tableau, comment savoir si je suis a la fin du tableau ? cle[i]== nil
 puts nombrecoin
 end
 
 
 def deviseinf6000
-valeur=hashage.values.sort_by{|s| s.scan(/\d+/).first.to_i}
+valeur=hashage.values.sort_by{|s| s.scan(/\d+/).first.to_i}#je choppe toutes les values dans une variable  variable. cette variable est un tableau. donc j;utilise la meme technique vue plus haut pour me deplacer dedans.
 i=0
-  while valeur[i]!=nil
-    chiffre=valeur[i]
-    if chiffre[1..-1].to_i<6000
-
-      puts "#{hashage.key(chiffre)} = #{chiffre}"
+  while valeur[i]!=nil#je refais un deplacement dans cette variable
+    chiffre=valeur[i]#ici je demande d'integrer la valeur[i]dans une variable, autrement dit, je dis a un string de contenir un element du tableau valeur.
+    if chiffre[1..-1].to_i<6000#dans un string on peut aussi se deplacer  dedans, ici je demande de contenir uniquement les elements partant du second caracte[1..]re jusqu'a la fin du string[-1].
+      puts "#{hashage.key(chiffre)} = #{chiffre}"#je demade a  ce que soit affichier les variables inferieur a 6000$
     end
   i+=1
   end
 end
 
-def devisemax6000
+def devisemax6000#presque pareil que la fonction en haut
   valeur=hashage.values.sort_by{|s| s.scan(/\d+/).first.to_i}
   i=0
-  valeurmax=-1
+  valeurmax=-1#sauf ici car j'ai deux incrementation a faire la premier i et la seconde valeurmax, valeurmax
     while valeur[i]!=nil
       chiffre=valeur[i]
         if chiffre[1..-1].to_i<=6000
-            valeurmax=valeurmax+1
+            valeurmax=valeurmax+1#valeur max ne s'incremente que si les values du hashages sont inferieures a 6000.
         end
     i+=1
     end
     puts "La monnaie #{hashage.key(valeur[valeurmax])}  qui a pour valeur #{valeur[valeurmax]} , est la plus proche des 6000$"
-end
+end#le puts renvoi deux choses la key, et la value, c'est la que valeurmax a toute son importance car elle me permet de savoir quel est le dernier element a etre le plus proche des 6000$
+#si j'avais declarer au depart valeur max=0, lors de la derniere incrementation j'aurais eut un probleme car elle donnera l'element qui se trouve juste au desssus des 6000$ et non en dessous.
 
 
 
