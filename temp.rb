@@ -66,5 +66,5 @@ beginH(twitter)
 hight(twitter)
 underscore(twitter)
 #ssort(twitter) trop chiante tu vois plus le resultat du reste mais tkt elle marche
-#short50(twitter) la meme pour lui
+#short50(twitter) la meme pour elle
 epenser(twitter)
